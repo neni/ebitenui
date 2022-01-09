@@ -3,7 +3,7 @@ package main
 import (
 	"image/color"
 	_ "image/png"
-	"io/ioutil"
+	//"io/ioutil"
 	"log"
 
 	"github.com/blizzy78/ebitenui"
@@ -11,13 +11,15 @@ import (
 	"github.com/blizzy78/ebitenui/widget"
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	//"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"golang.org/x/image/font"
 )
 
 type game struct {
 	ui *ebitenui.UI
 }
+
+
 
 func main() {
 	// load images for button states: idle, hover, and pressed
@@ -141,7 +143,7 @@ func loadButtonImage() (*widget.ButtonImage, error) {
 }
 
 func loadNineSlice(path string, w [3]int, h [3]int) (*image.NineSlice, error) {
-	i, _, err := ebitenutil.NewImageFromFile(path)
+	i, _, err := NewImageFromEmbedFile(path)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +152,7 @@ func loadNineSlice(path string, w [3]int, h [3]int) (*image.NineSlice, error) {
 }
 
 func loadFont(path string, size float64) (font.Face, error) {
-	fontData, err := ioutil.ReadFile(path)
+	fontData, err := EmbedData.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}

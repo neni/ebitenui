@@ -6,7 +6,6 @@ import (
 
 	"github.com/blizzy78/ebitenui/image"
 	"github.com/blizzy78/ebitenui/widget"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"golang.org/x/image/font"
 )
 
@@ -387,37 +386,37 @@ func newComboButtonResources(fonts *fonts) (*comboButtonResources, error) {
 }
 
 func newListResources(fonts *fonts) (*listResources, error) {
-	idle, _, err := ebitenutil.NewImageFromFile("graphics/list-idle.png")
+	idle, _, err := NewImageFromEmbedFile("graphics/list-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	disabled, _, err := ebitenutil.NewImageFromFile("graphics/list-disabled.png")
+	disabled, _, err := NewImageFromEmbedFile("graphics/list-disabled.png")
 	if err != nil {
 		return nil, err
 	}
 
-	mask, _, err := ebitenutil.NewImageFromFile("graphics/list-mask.png")
+	mask, _, err := NewImageFromEmbedFile("graphics/list-mask.png")
 	if err != nil {
 		return nil, err
 	}
 
-	trackIdle, _, err := ebitenutil.NewImageFromFile("graphics/list-track-idle.png")
+	trackIdle, _, err := NewImageFromEmbedFile("graphics/list-track-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	trackDisabled, _, err := ebitenutil.NewImageFromFile("graphics/list-track-disabled.png")
+	trackDisabled, _, err := NewImageFromEmbedFile("graphics/list-track-disabled.png")
 	if err != nil {
 		return nil, err
 	}
 
-	handleIdle, _, err := ebitenutil.NewImageFromFile("graphics/slider-handle-idle.png")
+	handleIdle, _, err := NewImageFromEmbedFile("graphics/slider-handle-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	handleHover, _, err := ebitenutil.NewImageFromFile("graphics/slider-handle-hover.png")
+	handleHover, _, err := NewImageFromEmbedFile("graphics/slider-handle-hover.png")
 	if err != nil {
 		return nil, err
 	}
@@ -471,27 +470,27 @@ func newListResources(fonts *fonts) (*listResources, error) {
 }
 
 func newSliderResources() (*sliderResources, error) {
-	idle, _, err := ebitenutil.NewImageFromFile("graphics/slider-track-idle.png")
+	idle, _, err := NewImageFromEmbedFile("graphics/slider-track-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	disabled, _, err := ebitenutil.NewImageFromFile("graphics/slider-track-disabled.png")
+	disabled, _, err := NewImageFromEmbedFile("graphics/slider-track-disabled.png")
 	if err != nil {
 		return nil, err
 	}
 
-	handleIdle, _, err := ebitenutil.NewImageFromFile("graphics/slider-handle-idle.png")
+	handleIdle, _, err := NewImageFromEmbedFile("graphics/slider-handle-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	handleHover, _, err := ebitenutil.NewImageFromFile("graphics/slider-handle-hover.png")
+	handleHover, _, err := NewImageFromEmbedFile("graphics/slider-handle-hover.png")
 	if err != nil {
 		return nil, err
 	}
 
-	handleDisabled, _, err := ebitenutil.NewImageFromFile("graphics/slider-handle-disabled.png")
+	handleDisabled, _, err := NewImageFromEmbedFile("graphics/slider-handle-disabled.png")
 	if err != nil {
 		return nil, err
 	}
@@ -625,12 +624,12 @@ func newHeaderResources(fonts *fonts) (*headerResources, error) {
 }
 
 func newTextInputResources(fonts *fonts) (*textInputResources, error) {
-	idle, _, err := ebitenutil.NewImageFromFile("graphics/text-input-idle.png")
+	idle, _, err := NewImageFromEmbedFile("graphics/text-input-idle.png")
 	if err != nil {
 		return nil, err
 	}
 
-	disabled, _, err := ebitenutil.NewImageFromFile("graphics/text-input-disabled.png")
+	disabled, _, err := NewImageFromEmbedFile("graphics/text-input-disabled.png")
 	if err != nil {
 		return nil, err
 	}
@@ -660,7 +659,7 @@ func newTextInputResources(fonts *fonts) (*textInputResources, error) {
 }
 
 func newToolTipResources(fonts *fonts) (*toolTipResources, error) {
-	bg, _, err := ebitenutil.NewImageFromFile("graphics/tool-tip.png")
+	bg, _, err := NewImageFromEmbedFile("graphics/tool-tip.png")
 	if err != nil {
 		return nil, err
 	}
