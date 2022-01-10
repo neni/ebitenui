@@ -3,15 +3,16 @@ package main
 import (
 	"image/color"
 	_ "image/png"
-	//"io/ioutil"
 	"log"
+	"fmt"
 
 	"github.com/blizzy78/ebitenui"
 	"github.com/blizzy78/ebitenui/image"
 	"github.com/blizzy78/ebitenui/widget"
+	"github.com/blizzy78/ebitenui/internal/input"
 	"github.com/golang/freetype/truetype"
 	"github.com/hajimehoshi/ebiten/v2"
-	//"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"golang.org/x/image/font"
 )
 
@@ -117,6 +118,8 @@ func (g *game) Update() error {
 func (g *game) Draw(screen *ebiten.Image) {
 	// draw the UI onto the screen
 	g.ui.Draw(screen)
+	// debug touchs
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("Degug\nTPS: %0.2f\nFPS: %0.2f\nTouchs: %d", ebiten.CurrentTPS(), ebiten.CurrentFPS(), len(input.InputTouchs)))
 }
 
 func loadButtonImage() (*widget.ButtonImage, error) {

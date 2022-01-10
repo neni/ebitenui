@@ -1,2 +1,5 @@
 /_demo/__debug_bin
+/_demo/*.apk
 /_scaffold/__debug_bin
+/_scaffold/*.apk
+

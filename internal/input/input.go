@@ -2,6 +2,7 @@ package input
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 var (
@@ -24,7 +25,21 @@ var (
 	InputChars    []rune
 	KeyPressed    = map[ebiten.Key]bool{}
 	AnyKeyPressed bool
+
+	touchIDs        []ebiten.TouchID
+	InputTouchs     = map[ebiten.TouchID]*Touch{}
+
 )
+
+// Touch is stats of touchs
+type Touch struct {
+	//Id          ebiten.TouchID
+	CursorX     int
+	CursorY     int
+	JustPressed bool
+	LastPressed bool
+}
+
 
 // Update updates the input system. This is called by the UI.
 func Update() {
@@ -48,6 +63,42 @@ func Update() {
 			AnyKeyPressed = true
 		}
 	}
+
+	// update touchs
+	for id, t := range InputTouchs {
+		if(t.LastPressed) {
+			delete(InputTouchs, id)
+		}else{
+			if inpututil.IsTouchJustReleased(id) {
+				t.LastPressed = true
+			}
+			t.JustPressed = false
+			t.CursorX, t.CursorY = ebiten.TouchPosition(id)
+		}
+	}
+	// add new touchs
+	newTouchs := inpututil.AppendJustPressedTouchIDs(touchIDs[:0]);
+	for _, id := range newTouchs {
+	  newTouch := new(Touch)
+		newTouch.JustPressed = true
+		newTouch.LastPressed = false
+		newTouch.CursorX, newTouch.CursorY = ebiten.TouchPosition(id)
+		InputTouchs[id] = newTouch
+	}
+
+	// temp: emulate mouse
+	for _, t := range InputTouchs {
+		switch len(InputTouchs) {
+			case 1:
+				LeftMouseButtonJustPressed = /*LeftMouseButtonJustPressed ||*/ t.JustPressed
+				LastLeftMouseButtonPressed = /*LastLeftMouseButtonPressed ||*/ t.LastPressed
+				LeftMouseButtonPressed = true
+				CursorX = t.CursorX
+				CursorY = t.CursorY
+		}
+	}
+
+
 }
 
 // Draw updates the input system. This is called by the UI.
@@ -65,4 +116,5 @@ func Draw() {
 func AfterDraw() {
 	InputChars = InputChars[:0]
 	WheelX, WheelY = 0, 0
+	//touchIDs = touchIDs[:0]
 }

@@ -3,17 +3,20 @@ package main
 import (
 	"log"
 	"sort"
+	"fmt"
 
 	"golang.org/x/text/collate"
 	"golang.org/x/text/language"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
 	_ "image/png"
 
 	"github.com/blizzy78/ebitenui"
 	"github.com/blizzy78/ebitenui/image"
 	"github.com/blizzy78/ebitenui/widget"
+	"github.com/blizzy78/ebitenui/internal/input"
 )
 
 type game struct {
@@ -123,7 +126,7 @@ func headerContainer(res *uiResources) widget.PreferredSizeLocateableWidget {
 			widget.RowLayoutOpts.Spacing(15))),
 	)
 
-	c.AddChild(header("Ebiten UI Demo", res,
+	c.AddChild(header("        Ebiten UI Demo", res,
 		widget.ContainerOpts.WidgetOpts(widget.WidgetOpts.LayoutData(widget.RowLayoutData{
 			Stretch: true,
 		})),
@@ -375,4 +378,6 @@ func (g *game) Update() error {
 
 func (g *game) Draw(screen *ebiten.Image) {
 	g.ui.Draw(screen)
+	// debug touchs
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("Degug\nTPS: %0.2f\nFPS: %0.2f\nTouchs: %d", ebiten.CurrentTPS(), ebiten.CurrentFPS(), len(input.InputTouchs)))
 }
